@@ -14,10 +14,10 @@ public class CarController : MonoBehaviour
         Quaternion rotation;
         axleInfo.leftWheelCollider.GetWorldPose(out position, out rotation);
         axleInfo.leftWheelMesh.transform.position = position;
-        axleInfo.leftWheelMesh.transform.rotation = rotation;
+        axleInfo.leftWheelMesh.transform.rotation = rotation *= Quaternion.Euler(0, 0, 90);
         axleInfo.rightWheelCollider.GetWorldPose(out position, out rotation);
         axleInfo.rightWheelMesh.transform.position = position;
-        axleInfo.rightWheelMesh.transform.rotation = rotation;
+        axleInfo.rightWheelMesh.transform.rotation = rotation *= Quaternion.Euler(0, 0, 90);
     }
 
     public void FixedUpdate()
