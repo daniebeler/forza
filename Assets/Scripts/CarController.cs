@@ -58,10 +58,10 @@ public class CarController : MonoBehaviour
         {
             WheelFrictionCurve fFriction = wheel.forwardFriction;
             fFriction.stiffness = hit.collider.material.staticFriction;
-            wheel.forwardFriction = fFriction;
+           // wheel.forwardFriction = fFriction;
             WheelFrictionCurve sFriction = wheel.sidewaysFriction;
             sFriction.stiffness = hit.collider.material.staticFriction;
-            wheel.sidewaysFriction = sFriction;
+           // wheel.sidewaysFriction = sFriction;
         }
     }
 }
