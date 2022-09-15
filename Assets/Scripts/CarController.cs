@@ -8,6 +8,13 @@ public class CarController : MonoBehaviour
     public float maxMotorTorque; // maximum torque the motor can apply to wheel
     public float maxSteeringAngle; // maximum steer angle the wheel can have
 
+    public Vector3 centerOfMass;
+
+    public void Start()
+    {
+        GetComponent<Rigidbody>().centerOfMass = centerOfMass;
+    }
+
     public void ApplyLocalPositionToVisuals(AxleInfo axleInfo)
     {
         Vector3 position;
@@ -38,7 +45,46 @@ public class CarController : MonoBehaviour
                 axleInfo.rightWheelCollider.motorTorque = motor;
             }
             ApplyLocalPositionToVisuals(axleInfo);
+
+            // WheelHit hit = new WheelHit();
+            // WheelCollider wheel = axleInfo.leftWheelCollider;
+            // if (wheel.GetGroundHit(out hit))
+            // {
+            //     if (hit.collider.tag == "ice")
+            //     {
+            //         wheel.sidewaysFriction = 0;
+            //     }
+            //     else
+            //     {
+
+            //     }
+            // }
+
+            WheelHit hit;
+            WheelCollider wheel = axleInfo.leftWheelCollider;
+            if (wheel.GetGroundHit(out hit))
+            {
+                WheelFrictionCurve fFriction = wheel.forwardFriction;
+                fFriction.stiffness = hit.collider.material.staticFriction;
+                wheel.forwardFriction = fFriction;
+                WheelFrictionCurve sFriction = wheel.sidewaysFriction;
+                sFriction.stiffness = hit.collider.material.staticFriction;
+                wheel.sidewaysFriction = sFriction;
+            }
+
+            wheel = axleInfo.rightWheelCollider;
+            if (wheel.GetGroundHit(out hit))
+            {
+                WheelFrictionCurve fFriction = wheel.forwardFriction;
+                fFriction.stiffness = hit.collider.material.staticFriction;
+                wheel.forwardFriction = fFriction;
+                WheelFrictionCurve sFriction = wheel.sidewaysFriction;
+                sFriction.stiffness = hit.collider.material.staticFriction;
+                wheel.sidewaysFriction = sFriction;
+            }
         }
+
+
     }
 }
 
