@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public List<AxleInfo> axleInfos; // the information about each individual axle
-    public float maxMotorTorque; // maximum torque the motor can apply to wheel
-    public float maxSteeringAngle; // maximum steer angle the wheel can have
+    public List<AxleInfo> axleInfos;
+    public float maxMotorTorque;
+    public float maxSteeringAngle;
 
     public Vector3 centerOfMass;
 
@@ -34,57 +34,35 @@ public class CarController : MonoBehaviour
 
         foreach (AxleInfo axleInfo in axleInfos)
         {
-            if (axleInfo.steering)
+            if (axleInfo.isSteering)
             {
                 axleInfo.leftWheelCollider.steerAngle = steering;
                 axleInfo.rightWheelCollider.steerAngle = steering;
             }
-            if (axleInfo.motor)
+            if (axleInfo.isAttachedToMotor)
             {
                 axleInfo.leftWheelCollider.motorTorque = motor;
                 axleInfo.rightWheelCollider.motorTorque = motor;
             }
             ApplyLocalPositionToVisuals(axleInfo);
 
-            // WheelHit hit = new WheelHit();
-            // WheelCollider wheel = axleInfo.leftWheelCollider;
-            // if (wheel.GetGroundHit(out hit))
-            // {
-            //     if (hit.collider.tag == "ice")
-            //     {
-            //         wheel.sidewaysFriction = 0;
-            //     }
-            //     else
-            //     {
-
-            //     }
-            // }
-
-            WheelHit hit;
-            WheelCollider wheel = axleInfo.leftWheelCollider;
-            if (wheel.GetGroundHit(out hit))
-            {
-                WheelFrictionCurve fFriction = wheel.forwardFriction;
-                fFriction.stiffness = hit.collider.material.staticFriction;
-                wheel.forwardFriction = fFriction;
-                WheelFrictionCurve sFriction = wheel.sidewaysFriction;
-                sFriction.stiffness = hit.collider.material.staticFriction;
-                wheel.sidewaysFriction = sFriction;
-            }
-
-            wheel = axleInfo.rightWheelCollider;
-            if (wheel.GetGroundHit(out hit))
-            {
-                WheelFrictionCurve fFriction = wheel.forwardFriction;
-                fFriction.stiffness = hit.collider.material.staticFriction;
-                wheel.forwardFriction = fFriction;
-                WheelFrictionCurve sFriction = wheel.sidewaysFriction;
-                sFriction.stiffness = hit.collider.material.staticFriction;
-                wheel.sidewaysFriction = sFriction;
-            }
+            setWheelFrictionCurve(axleInfo.leftWheelCollider);
+            setWheelFrictionCurve(axleInfo.rightWheelCollider);
         }
+    }
 
-
+    private void setWheelFrictionCurve(WheelCollider wheel)
+    {
+        WheelHit hit;
+        if (wheel.GetGroundHit(out hit))
+        {
+            WheelFrictionCurve fFriction = wheel.forwardFriction;
+            fFriction.stiffness = hit.collider.material.staticFriction;
+            wheel.forwardFriction = fFriction;
+            WheelFrictionCurve sFriction = wheel.sidewaysFriction;
+            sFriction.stiffness = hit.collider.material.staticFriction;
+            wheel.sidewaysFriction = sFriction;
+        }
     }
 }
 
@@ -95,6 +73,6 @@ public class AxleInfo
     public GameObject rightWheelMesh;
     public WheelCollider leftWheelCollider;
     public WheelCollider rightWheelCollider;
-    public bool motor; // is this wheel attached to motor?
-    public bool steering; // does this wheel apply steer angle?
+    public bool isAttachedToMotor;
+    public bool isSteering;
 }

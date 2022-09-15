@@ -17590,14 +17590,14 @@ MonoBehaviour:
     rightWheelMesh: {fileID: 2080458844}
     leftWheelCollider: {fileID: 173550799}
     rightWheelCollider: {fileID: 157721941}
-    motor: 1
-    steering: 1
+    isAttachedToMotor: 1
+    isSteering: 1
   - leftWheelMesh: {fileID: 540569672}
     rightWheelMesh: {fileID: 1378252915}
     leftWheelCollider: {fileID: 877046198}
     rightWheelCollider: {fileID: 116515489}
-    motor: 1
-    steering: 0
+    isAttachedToMotor: 1
+    isSteering: 0
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   centerOfMass: {x: 0, y: 0, z: 0}
