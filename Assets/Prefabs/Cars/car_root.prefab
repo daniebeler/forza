@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4470307907026181694}
   - component: {fileID: 3179232227302958074}
   - component: {fileID: 4462319679820982838}
+  - component: {fileID: 1773127243345159763}
   m_Layer: 0
   m_Name: front_rhs_wheel1
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3047397657932273941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 1}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 14, y: 14, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3489949218092743658}
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1773127243345159763
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047397657932273941}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 10d5972a5440d489f8a54e2d7498188b, type: 3}
 --- !u!1 &3489949216960687238
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +542,7 @@ MonoBehaviour:
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   centerOfMass: {x: 0, y: 0, z: 0}
+  handbrakeTorque: 100000
 --- !u!1 &3489949217809459117
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +665,7 @@ GameObject:
   - component: {fileID: 8909650479008873416}
   - component: {fileID: 7860129462088393039}
   - component: {fileID: 925198855309309213}
+  - component: {fileID: 4079246464396124440}
   m_Layer: 0
   m_Name: back_rhs_wheel1
   m_TagString: Untagged
@@ -665,7 +682,7 @@ Transform:
   m_GameObject: {fileID: 5686986620037764923}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: -1}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 14, y: 14, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3489949218092743658}
@@ -721,6 +738,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4079246464396124440
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686986620037764923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 10d5972a5440d489f8a54e2d7498188b, type: 3}
 --- !u!1 &5994810026464619215
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +763,7 @@ GameObject:
   - component: {fileID: 1412104706972118241}
   - component: {fileID: 678081999949712844}
   - component: {fileID: 3077650370313858791}
+  - component: {fileID: 5289339346077761908}
   m_Layer: 0
   m_Name: back_lhs_wheel1
   m_TagString: Untagged
@@ -748,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 5994810026464619215}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: 0, z: -1}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 14, y: 14, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3489949218092743658}
@@ -804,6 +836,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5289339346077761908
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994810026464619215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 10d5972a5440d489f8a54e2d7498188b, type: 3}
 --- !u!1 &6148411439845705136
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +861,7 @@ GameObject:
   - component: {fileID: 8059930516810856260}
   - component: {fileID: 4688514898641957090}
   - component: {fileID: 1967667030288017351}
+  - component: {fileID: 200520414365963425}
   m_Layer: 0
   m_Name: front_lhs_wheel1
   m_TagString: Untagged
@@ -831,7 +878,7 @@ Transform:
   m_GameObject: {fileID: 6148411439845705136}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: 0, z: 1}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 14, y: 14, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3489949218092743658}
@@ -887,3 +934,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &200520414365963425
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148411439845705136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 10d5972a5440d489f8a54e2d7498188b, type: 3}

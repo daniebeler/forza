@@ -896,6 +896,7 @@ MonoBehaviour:
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   centerOfMass: {x: 0, y: 0, z: 0}
+  handbrakeTorque: 600
 --- !u!1 &9053521129779670250
 GameObject:
   m_ObjectHideFlags: 0

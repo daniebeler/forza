@@ -9,6 +9,7 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle;
     public Vector3 centerOfMass;
 
+
     public void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = centerOfMass;
@@ -41,19 +42,33 @@ public class CarController : MonoBehaviour
     {
         float motor = maxMotorTorque * Input.GetAxis("Vertical");
         float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
+        bool handBrake = Input.GetKey("space");
 
         foreach (AxleInfo axleInfo in axleInfos)
         {
+            if (handBrake)
+            {
+                axleInfo.leftWheelCollider.brakeTorque = 6000f;
+                axleInfo.rightWheelCollider.brakeTorque = 6000f;
+                axleInfo.leftWheelCollider.motorTorque = 0;
+                axleInfo.rightWheelCollider.motorTorque = 0;
+            }
+            else
+            {
+                axleInfo.leftWheelCollider.brakeTorque = 0;
+                axleInfo.rightWheelCollider.brakeTorque = 0;
+                if (axleInfo.isAttachedToMotor)
+                {
+                    axleInfo.leftWheelCollider.motorTorque = motor;
+                    axleInfo.rightWheelCollider.motorTorque = motor;
+                }
+            }
             if (axleInfo.isSteering)
             {
                 axleInfo.leftWheelCollider.steerAngle = steering;
                 axleInfo.rightWheelCollider.steerAngle = steering;
             }
-            if (axleInfo.isAttachedToMotor)
-            {
-                axleInfo.leftWheelCollider.motorTorque = motor;
-                axleInfo.rightWheelCollider.motorTorque = motor;
-            }
+
             ApplyLocalPositionToVisuals(axleInfo);
 
             setWheelFrictionCurve(axleInfo.leftWheelCollider);
