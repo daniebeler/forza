@@ -11,8 +11,8 @@ public class WheelSkid : MonoBehaviour {
 
 	[SerializeField]
 	Rigidbody rb;
-	[SerializeField]
-	Skidmarks skidmarksController;
+
+    private Skidmarks skidmarksController;
 
 	// END INSPECTOR SETTINGS
 
@@ -73,6 +73,11 @@ public class WheelSkid : MonoBehaviour {
 			lastSkid = -1;
 		}
 	}
+
+    public void setSkidMarkController(Skidmarks skidmarks)
+    {
+        skidmarksController = skidmarks;
+    }
 
 	// #### PUBLIC METHODS ####
 

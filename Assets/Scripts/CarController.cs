@@ -7,12 +7,22 @@ public class CarController : MonoBehaviour
     public List<AxleInfo> axleInfos;
     public float maxMotorTorque;
     public float maxSteeringAngle;
-
     public Vector3 centerOfMass;
 
     public void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = centerOfMass;
+        setSkidMarks();
+    }
+
+    public void setSkidMarks()
+    {
+        Skidmarks skidmarks = GameObject.FindGameObjectWithTag("scriptholder").GetComponent<Skidmarks>();
+        foreach (var axle in axleInfos)
+        {
+            axle.leftWheel.GetComponent<WheelSkid>().setSkidMarkController(skidmarks);
+            axle.rightWheel.GetComponent<WheelSkid>().setSkidMarkController(skidmarks);
+        }
     }
 
     public void ApplyLocalPositionToVisuals(AxleInfo axleInfo)
@@ -73,6 +83,8 @@ public class AxleInfo
     public GameObject rightWheelMesh;
     public WheelCollider leftWheelCollider;
     public WheelCollider rightWheelCollider;
+    public GameObject leftWheel;
+    public GameObject rightWheel;
     public bool isAttachedToMotor;
     public bool isSteering;
 }
