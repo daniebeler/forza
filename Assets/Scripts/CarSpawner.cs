@@ -6,12 +6,14 @@ public class CarSpawner : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> CarPrefabs;
+    [SerializeField] 
+    private int carNumber;
     [SerializeField]
     private Vector3 position;
     public CameraFollow cameraFollow;
     void Start()
     {
-        GameObject car = Instantiate(CarPrefabs[0], position, Quaternion.identity);
+        GameObject car = Instantiate(CarPrefabs[carNumber], position, Quaternion.identity);
         cameraFollow.setTarget(car.transform);
     }
 
