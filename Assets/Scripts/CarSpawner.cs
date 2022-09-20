@@ -16,6 +16,11 @@ public class CarSpawner : MonoBehaviour
         GameObject car = Instantiate(CarPrefabs[carNumber], position, Quaternion.identity);
         cameraFollow.setTarget(car.transform);
     }
+    void SpawnCar(Vector3 spawnPosition)
+    {
+        GameObject car = Instantiate(CarPrefabs[carNumber], spawnPosition, Quaternion.identity);
+        cameraFollow.setTarget(car.transform);
+    }
 
     // Update is called once per frame
     void Update()

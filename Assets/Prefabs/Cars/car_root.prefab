@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 3489949217616349440}
   - component: {fileID: 3489949217616349441}
   - component: {fileID: 3489949217616349443}
+  - component: {fileID: 7004738884403644124}
   m_Layer: 0
   m_Name: car_root
   m_TagString: Untagged
@@ -542,7 +543,18 @@ MonoBehaviour:
   maxMotorTorque: 1000
   maxSteeringAngle: 30
   centerOfMass: {x: 0, y: 0, z: 0}
-  handbrakeTorque: 100000
+--- !u!114 &7004738884403644124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3489949217616349454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf1bd2b95c0d5a42a76dd413e7b8af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3489949217809459117
 GameObject:
   m_ObjectHideFlags: 0

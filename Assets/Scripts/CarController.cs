@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
@@ -9,14 +11,34 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle;
     public Vector3 centerOfMass;
 
+    private Controls _controls;
+    private InputAction _move;
 
+    public void Awake()
+    {
+        _controls = new Controls();
+    }
+
+    private void OnEnable()
+    {
+        _move = _controls.Player.Move;
+        _move.Enable();
+        _controls.Player.Handbreak.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _move.Disable();
+        _controls.Player.Handbreak.Disable();
+
+    }
     public void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = centerOfMass;
-        setSkidMarks();
+        SetSkidMarks();
     }
 
-    public void setSkidMarks()
+    private void SetSkidMarks()
     {
         Skidmarks skidmarks = GameObject.FindGameObjectWithTag("scriptholder").GetComponent<Skidmarks>();
         foreach (var axle in axleInfos)
@@ -26,7 +48,7 @@ public class CarController : MonoBehaviour
         }
     }
 
-    public void ApplyLocalPositionToVisuals(AxleInfo axleInfo)
+    private void ApplyLocalPositionToVisuals(AxleInfo axleInfo)
     {
         Vector3 position;
         Quaternion rotation;
@@ -38,11 +60,12 @@ public class CarController : MonoBehaviour
         axleInfo.rightWheelMesh.transform.rotation = rotation *= Quaternion.Euler(0, 0, 0);
     }
 
-    public void FixedUpdate()
+    public void Move()
     {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
-        float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
-        bool handBrake = Input.GetKey("space");
+        Vector2 movement = _move.ReadValue<Vector2>();
+        float motor = maxMotorTorque * movement.y;
+        float steering = maxSteeringAngle * movement.x;
+        bool handBrake = _controls.Player.Handbreak.IsPressed();
 
         foreach (AxleInfo axleInfo in axleInfos)
         {
@@ -74,6 +97,11 @@ public class CarController : MonoBehaviour
             setWheelFrictionCurve(axleInfo.leftWheelCollider);
             setWheelFrictionCurve(axleInfo.rightWheelCollider);
         }
+    }
+
+    public void FixedUpdate()
+    {
+        Move();
     }
 
     private void setWheelFrictionCurve(WheelCollider wheel)
