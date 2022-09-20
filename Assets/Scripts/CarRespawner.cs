@@ -2,8 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 public class CarRespawner : MonoBehaviour
 {
     private List<GameObject> _respawnPoints;
@@ -39,13 +43,13 @@ public class CarRespawner : MonoBehaviour
     {
     }
 
-    void Respawn(InputAction.CallbackContext context)
+    void Respawn(InputAction.CallbackContext context) 
     {
         Transform closestRespawnPosition = FindClosestPoint();
         gameObject.transform.position = closestRespawnPosition.position;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
-
+    
     Transform FindClosestPoint()
     {
         Vector3 startPosition = gameObject.transform.position;
