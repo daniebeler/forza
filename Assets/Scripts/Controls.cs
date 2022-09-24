@@ -440,6 +440,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""638f0c6a-d21e-41cc-aa00-9973e2cffecd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -871,6 +880,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""F3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20eacd7a-4d06-4618-9951-2cf0534dc7e0"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -959,6 +979,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_F3 = m_UI.FindAction("F3", throwIfNotFound: true);
+        m_UI_Settings = m_UI.FindAction("Settings", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1102,6 +1123,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_F3;
+    private readonly InputAction m_UI_Settings;
     public struct UIActions
     {
         private @Controls m_Wrapper;
@@ -1117,6 +1139,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @F3 => m_Wrapper.m_UI_F3;
+        public InputAction @Settings => m_Wrapper.m_UI_Settings;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1159,6 +1182,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @F3.started -= m_Wrapper.m_UIActionsCallbackInterface.OnF3;
                 @F3.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnF3;
                 @F3.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnF3;
+                @Settings.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
+                @Settings.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
+                @Settings.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1196,6 +1222,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @F3.started += instance.OnF3;
                 @F3.performed += instance.OnF3;
                 @F3.canceled += instance.OnF3;
+                @Settings.started += instance.OnSettings;
+                @Settings.performed += instance.OnSettings;
+                @Settings.canceled += instance.OnSettings;
             }
         }
     }
@@ -1267,5 +1296,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnF3(InputAction.CallbackContext context);
+        void OnSettings(InputAction.CallbackContext context);
     }
 }

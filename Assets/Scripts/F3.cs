@@ -5,8 +5,8 @@ using TMPro;
 
 public class F3 : MonoBehaviour
 {
-
-    public TMP_Text textFPS;
+    [SerializeField]
+    private TMP_Text textFPS;
 
     void Update()
     {
