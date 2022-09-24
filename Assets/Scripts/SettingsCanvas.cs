@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class SettingsCanvas : MonoBehaviour
 {
-    [SerializeField]
-    private Toggle vsync;
+    [SerializeField] private Toggle vsync;
 
-    [SerializeField]
-    private QualityController qualityController;
+    [SerializeField] private QualityController qualityController;
 
     void Start()
     {
@@ -22,9 +20,6 @@ public class SettingsCanvas : MonoBehaviour
             vsync.isOn = false;
         }
 
-        vsync.onValueChanged.AddListener(delegate
-        {
-            qualityController.setVsync(vsync.isOn);
-        });
+        vsync.onValueChanged.AddListener(delegate { qualityController.setVsync(vsync.isOn); });
     }
 }

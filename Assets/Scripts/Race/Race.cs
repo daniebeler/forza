@@ -3,27 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Race : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject finish, raceCanvas;
+    [SerializeField] private GameObject finish, raceCanvas;
 
     private DateTime _time;
 
     private TimeSpan _finishTime;
 
     private bool _finished;
+
+    public bool highscoreExists;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void StartRace()
@@ -39,7 +40,8 @@ public class Race : MonoBehaviour
         _finishTime = _time - DateTime.Now;
         _finished = true;
         Debug.Log("finish Race");
-        Debug.Log(_finishTime.ToString("mm':'ss"));
+        Debug.Log(_finishTime.ToString("mm':'ss':'ff"));
+        PlayerPrefs.SetFloat("highscore", (float) _finishTime.TotalMinutes);
     }
 
     public TimeSpan GetTime()
