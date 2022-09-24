@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class QualityController : MonoBehaviour
 {
+    
+    [SerializeField] private RenderPipelineAsset[] qualityLevels;
+    
     void Start()
     {
         if (PlayerPrefs.GetInt("vsync", 0) == 1)
@@ -14,6 +18,8 @@ public class QualityController : MonoBehaviour
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 300;
         }
+        
+        setQualityLevel(PlayerPrefs.GetInt("qualitylevel", 5));
     }
 
     public void setVsync(bool state)
@@ -30,5 +36,11 @@ public class QualityController : MonoBehaviour
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 300;
         }
+    }
+    
+    public void setQualityLevel(int index)
+    {
+        QualitySettings.SetQualityLevel(index);
+        QualitySettings.renderPipeline = qualityLevels[index];
     }
 }
