@@ -36,7 +36,6 @@ public class CameraFollow : MonoBehaviour
         if (lookAround)
         {
             rotation = Quaternion.LookRotation(direction + rotMovingCamera, Vector3.up);
-            Debug.Log(rotation.x);
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotSmoothness * Time.deltaTime);
     }
