@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""159e3317-0378-4ccf-ae50-b5a8a939ed9f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -220,7 +229,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
@@ -313,6 +322,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Handbreak"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caf915f6-4e6a-4daf-90fe-b6ea05dc21a6"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CameraClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -905,6 +925,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Respawn = m_Player.FindAction("Respawn", throwIfNotFound: true);
         m_Player_Handbreak = m_Player.FindAction("Handbreak", throwIfNotFound: true);
+        m_Player_CameraClick = m_Player.FindAction("CameraClick", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -981,6 +1002,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Respawn;
     private readonly InputAction m_Player_Handbreak;
+    private readonly InputAction m_Player_CameraClick;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -990,6 +1012,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Respawn => m_Wrapper.m_Player_Respawn;
         public InputAction @Handbreak => m_Wrapper.m_Player_Handbreak;
+        public InputAction @CameraClick => m_Wrapper.m_Player_CameraClick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1014,6 +1037,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Handbreak.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHandbreak;
                 @Handbreak.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHandbreak;
                 @Handbreak.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHandbreak;
+                @CameraClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraClick;
+                @CameraClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraClick;
+                @CameraClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraClick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1033,6 +1059,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Handbreak.started += instance.OnHandbreak;
                 @Handbreak.performed += instance.OnHandbreak;
                 @Handbreak.canceled += instance.OnHandbreak;
+                @CameraClick.started += instance.OnCameraClick;
+                @CameraClick.performed += instance.OnCameraClick;
+                @CameraClick.canceled += instance.OnCameraClick;
             }
         }
     }
@@ -1194,6 +1223,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnRespawn(InputAction.CallbackContext context);
         void OnHandbreak(InputAction.CallbackContext context);
+        void OnCameraClick(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

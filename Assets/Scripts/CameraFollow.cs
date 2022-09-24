@@ -9,9 +9,10 @@ public class CameraFollow : MonoBehaviour
 
     public Vector3 moveOffset;
     public Vector3 rotOffset;
+    public Vector3 rotMovingCamera;
 
     public Transform carTarget;
-
+    private bool lookAround = false;
     void FixedUpdate()
     {
         HandleMovement();
@@ -32,8 +33,30 @@ public class CameraFollow : MonoBehaviour
         var rotation = new Quaternion();
 
         rotation = Quaternion.LookRotation(direction + rotOffset, Vector3.up);
-
+        if (lookAround)
+        {
+            rotation = Quaternion.LookRotation(direction + rotMovingCamera, Vector3.up);
+            Debug.Log(rotation.x);
+        }
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotSmoothness * Time.deltaTime);
+    }
+
+    public void stopRotation()
+    {
+        lookAround = false;
+    }
+
+    public void SetRotation(Vector2 y)
+    {
+        if (!lookAround)
+        {
+            rotMovingCamera = new Vector3(rotOffset.x + y.x * 0.1f  * Time.deltaTime, rotOffset.y + y.y * 0.1f , rotOffset.z);
+            lookAround = true;
+        }
+        else
+        {
+            rotMovingCamera = new Vector3(rotMovingCamera.x + y.x * 0.1f, rotMovingCamera.y + y.y * 0.1f, rotMovingCamera.z);
+        }
     }
 
     public void setTarget(Transform target)
