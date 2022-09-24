@@ -12,7 +12,6 @@ public class CarRespawner : MonoBehaviour
 {
     private List<GameObject> _respawnPoints;
 
-    // Start is called before the first frame update
     private Controls _controls;
     private InputAction _respawn;
     private void Awake()
@@ -35,12 +34,6 @@ public class CarRespawner : MonoBehaviour
     void Start()
     {
         _respawnPoints = GameObject.FindGameObjectsWithTag("respawnpoints").ToList();
-        Debug.Log("hallo");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void Respawn(InputAction.CallbackContext context) 
