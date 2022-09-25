@@ -9,7 +9,7 @@ using UnityEngine.PlayerLoop;
 public class RaceController : MonoBehaviour
 {
     [SerializeField] private int raceId;
-    [SerializeField] private GameObject finish, raceCanvas;
+    [SerializeField] private GameObject finishObject, raceCanvas;
 
     private List<SingleCheckpoint> _singleCheckpointsList;
     private int _nextCheckpointIndex;
@@ -27,7 +27,8 @@ public class RaceController : MonoBehaviour
     public void StartRace()
     {
         Debug.Log("start the race");
-        finish.SetActive(true);
+        finishObject.SetActive(true);
+        Debug.Log(finishObject.activeSelf);
         _time = DateTime.Now;
         raceCanvas.SetActive(true);
         UserData = SaveData.LoadUserData();
@@ -60,9 +61,8 @@ public class RaceController : MonoBehaviour
     private void ActivateCheckpoints()
     {
         _singleCheckpointsList = new List<SingleCheckpoint>();
-        GameObject checkpointsGameObject = transform.Find("Checkpoints").gameObject;
-        checkpointsGameObject.SetActive(true);
         Transform checkpoints = transform.Find("Checkpoints");
+        checkpoints.gameObject.SetActive(true);
         foreach (Transform singleCheckpointTransform in checkpoints)
         {
             SingleCheckpoint singleCheckpoint = singleCheckpointTransform.GetComponent<SingleCheckpoint>();
