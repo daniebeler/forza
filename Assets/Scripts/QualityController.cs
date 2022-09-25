@@ -22,6 +22,8 @@ public class QualityController : MonoBehaviour
         }
         
         setQualityLevel(PlayerPrefs.GetInt("qualitylevel", 5));
+
+        setTargetFramerate(PlayerPrefs.GetInt("framerate", 60));
         
         resolutions = Screen.resolutions;
     }
@@ -32,14 +34,16 @@ public class QualityController : MonoBehaviour
         {
             PlayerPrefs.SetInt("vsync", 1);
             QualitySettings.vSyncCount = 1;
-            Application.targetFrameRate = 60;
         }
         else
         {
             PlayerPrefs.SetInt("vsync", 0);
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 300;
         }
+    }
+
+    public void setTargetFramerate(int framerate) {
+        Application.targetFrameRate = framerate;
     }
     
     public void setQualityLevel(int index)

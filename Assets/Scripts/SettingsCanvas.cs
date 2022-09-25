@@ -10,6 +10,13 @@ public class SettingsCanvas : MonoBehaviour
     [SerializeField] 
     private Toggle vsync, fullscreen;
 
+    [SerializeField]
+    private TMP_Text targetFramerateText;
+
+
+    [SerializeField]
+    private Slider targetFramerateSlider;
+
     [SerializeField] 
     private QualityController qualityController;
 
@@ -50,11 +57,25 @@ public class SettingsCanvas : MonoBehaviour
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
+
+        targetFramerateSlider.value = PlayerPrefs.GetInt("framerate", 60);
     }
 
     public void changeQualityLevel(int index)
     {
         PlayerPrefs.SetInt("qualitylevel", index);
         qualityController.setQualityLevel(index);
+    }
+
+    public void changeTargetFramerate(float target) {
+        PlayerPrefs.SetInt("framerate", (int)target);
+
+        if (target == targetFramerateSlider.maxValue) {
+            targetFramerateText.text = "Target FPS: unlimited";
+            qualityController.setTargetFramerate(1000);
+        } else {
+            targetFramerateText.text = "Target FPS: " + (int)target;
+            qualityController.setTargetFramerate((int)target);
+        }
     }
 }
