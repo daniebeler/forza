@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartRace : MonoBehaviour
 {
-    [SerializeField] private Race race;
+    [SerializeField] private RaceController race;
 
     void Start()
     {

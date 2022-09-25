@@ -13,6 +13,11 @@ public class CarSpawner : MonoBehaviour
     public CameraFollow cameraFollow;
     void Start()
     {
+        UserData userData = SaveData.LoadUserData();
+        if (userData == null)
+        {
+            SaveData.SaveDataVoid(new UserData(0, new List<RaceHighscore>()));
+        }
         GameObject car = Instantiate(CarPrefabs[carNumber], position, Quaternion.identity);
         cameraFollow.setTarget(car.transform);
     }

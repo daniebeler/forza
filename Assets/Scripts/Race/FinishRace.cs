@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FinishRace : MonoBehaviour
 {
-    [SerializeField] private Race race;
+    [SerializeField] private RaceController race;
 
     // Start is called before the first frame update
     void Start()
