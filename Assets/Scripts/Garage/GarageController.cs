@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,32 @@ public class GarageController : MonoBehaviour
 
     [SerializeField] private Camera camera;
 
+    private float lerpSpeed = 10f;
+    private Vector3 currentAngle, targetAngle;
+ 
+    public void Start()
+    {
+        currentAngle = camera.transform.eulerAngles;
+        targetAngle = currentAngle;
+    }
+
     public void rotateRight()
     {
-        camera.transform.Rotate(0.0f, 45f, 0.0f, Space.World);
+        targetAngle[1] += 45f;
     }
     
     public void rotateLeft()
     {
-        camera.transform.Rotate(0.0f, -45f, 0.0f, Space.World);
+        targetAngle[1] -= 45f;
+    }
+
+    private void Update()
+    {
+        currentAngle = new Vector3(
+            currentAngle.x,
+            Mathf.LerpAngle(currentAngle.y, targetAngle.y, lerpSpeed * Time.deltaTime),
+            currentAngle.z);
+ 
+        camera.transform.eulerAngles = currentAngle;
     }
 }
