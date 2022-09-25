@@ -6,6 +6,8 @@ public class QualityController : MonoBehaviour
     
     [SerializeField] private RenderPipelineAsset[] qualityLevels;
     
+    private Resolution[] resolutions;
+    
     void Start()
     {
         if (PlayerPrefs.GetInt("vsync", 0) == 1)
@@ -20,6 +22,8 @@ public class QualityController : MonoBehaviour
         }
         
         setQualityLevel(PlayerPrefs.GetInt("qualitylevel", 5));
+        
+        resolutions = Screen.resolutions;
     }
 
     public void setVsync(bool state)
@@ -42,5 +46,10 @@ public class QualityController : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(index);
         QualitySettings.renderPipeline = qualityLevels[index];
+    }
+
+    public void setResolution(int index)
+    {
+        Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
     }
 }

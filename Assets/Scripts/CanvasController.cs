@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 public class CanvasController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject f3Menu, settingsMenu;
+    private GameObject f3Menu, settingsMenu, mapMenu, pauseMenu;
 
     private Controls _controls;
     private InputAction f3;
     private InputAction settings;
+    private InputAction map;
+    private InputAction pause;
 
     public void Awake()
     {
@@ -26,18 +28,42 @@ public class CanvasController : MonoBehaviour
         settings = _controls.UI.Settings;
         settings.Enable();
         settings.performed += toggleSettingsMenu;
+        
+        map = _controls.UI.Map;
+        map.Enable();
+        map.performed += toggleMapMenu;
+        
+        pause = _controls.UI.Pause;
+        pause.Enable();
+        pause.performed += pressedEsc;
     }
 
     private void OnDisable()
     {
         f3.Disable();
         settings.Disable();
+        map.Disable();
+        pause.Disable();
     }
     
     void Start()
     {
         f3Menu.SetActive(false);
         settingsMenu.SetActive(false);
+        mapMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+    }
+
+    private void pressedEsc(InputAction.CallbackContext context) {
+        if (mapMenu.activeSelf) {
+            closeMapMenu();
+        } else if (settingsMenu.activeSelf) {
+            closeSettingsMenu();
+        } else if (pauseMenu.activeSelf) {
+            closePauseMenu();
+        } else {
+            openPauseMenu();
+        }
     }
 
     void toggleFpsCanvas(InputAction.CallbackContext context) {
@@ -54,5 +80,45 @@ public class CanvasController : MonoBehaviour
         } else {
             settingsMenu.SetActive(true);
         }
+    }
+
+    public void openSettingsMenu() {
+        settingsMenu.SetActive(true);
+    }
+
+    public void closeSettingsMenu() {
+        settingsMenu.SetActive(false);
+    }
+    
+    void toggleMapMenu(InputAction.CallbackContext context) {
+        if(mapMenu.activeSelf) {
+            mapMenu.SetActive(false);
+        } else { 
+            mapMenu.SetActive(true);
+        }
+    }
+
+    public void openMapMenu() {
+        mapMenu.SetActive(true);
+    }
+
+    public void closeMapMenu() {
+        mapMenu.SetActive(false);
+    }
+    
+    void togglePauseMenu(InputAction.CallbackContext context) {
+        if(pauseMenu.activeSelf) {
+            pauseMenu.SetActive(false);
+        } else { 
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    public void openPauseMenu() {
+        pauseMenu.SetActive(true);
+    }
+
+    public void closePauseMenu() {
+        pauseMenu.SetActive(false);
     }
 }

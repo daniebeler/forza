@@ -449,6 +449,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""fec95f33-da8c-491d-b815-123535960028"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae58e21b-ae23-4dba-94c2-d720952e9208"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -891,6 +909,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Settings"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2434d82-2575-4c86-b97a-4cbdaff2440e"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""089a9ab7-f284-48bd-83c8-79f09087e91f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -980,6 +1020,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_F3 = m_UI.FindAction("F3", throwIfNotFound: true);
         m_UI_Settings = m_UI.FindAction("Settings", throwIfNotFound: true);
+        m_UI_Map = m_UI.FindAction("Map", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1124,6 +1166,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_F3;
     private readonly InputAction m_UI_Settings;
+    private readonly InputAction m_UI_Map;
+    private readonly InputAction m_UI_Pause;
     public struct UIActions
     {
         private @Controls m_Wrapper;
@@ -1140,6 +1184,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @F3 => m_Wrapper.m_UI_F3;
         public InputAction @Settings => m_Wrapper.m_UI_Settings;
+        public InputAction @Map => m_Wrapper.m_UI_Map;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1185,6 +1231,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Settings.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
                 @Settings.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
                 @Settings.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSettings;
+                @Map.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMap;
+                @Map.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMap;
+                @Map.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMap;
+                @Pause.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1225,6 +1277,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Settings.started += instance.OnSettings;
                 @Settings.performed += instance.OnSettings;
                 @Settings.canceled += instance.OnSettings;
+                @Map.started += instance.OnMap;
+                @Map.performed += instance.OnMap;
+                @Map.canceled += instance.OnMap;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1297,5 +1355,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnF3(InputAction.CallbackContext context);
         void OnSettings(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
