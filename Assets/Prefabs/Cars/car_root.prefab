@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 3489949217253868728}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 7004738884403644124}
   m_Layer: 0
   m_Name: car_root
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -555,7 +555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf1bd2b95c0d5a42a76dd413e7b8af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraFollow: {fileID: 0}
 --- !u!1 &3489949217809459117
 GameObject:
   m_ObjectHideFlags: 0

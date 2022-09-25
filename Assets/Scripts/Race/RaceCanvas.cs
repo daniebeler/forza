@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class RaceCanvas : MonoBehaviour
 {
-    [SerializeField] private TMP_Text textTime, highscoreTime;
+    [SerializeField] private TMP_Text textTime, highscoreTime, CheckpointTime;
 
     [SerializeField] private RaceController race;
 
@@ -19,5 +19,20 @@ public class RaceCanvas : MonoBehaviour
         {
             highscoreTime.text = "Highscore: " + race.highscore.ToString("mm':'ss':'ff");
         }
+    }
+
+    public void SetCheckpointTime(TimeSpan timeDiffrence)
+    {
+        if (timeDiffrence.Milliseconds > 0.0)
+        {
+            CheckpointTime.color = Color.red;
+            CheckpointTime.text = "Checkpoint: +" + timeDiffrence.ToString("mm':'ss':'ff");
+        }
+        else
+        {
+            CheckpointTime.color = Color.green;
+            CheckpointTime.text = "Checkpoint: -" + timeDiffrence.ToString("mm':'ss':'ff");
+        }
+        
     }
 }

@@ -21,9 +21,7 @@ public class SaveData : MonoBehaviour
     {
         string savePath = GetPaths();
         
-        Debug.Log("Saving Data at " + savePath);
         string json = JsonUtility.ToJson(saveObject);
-        Debug.Log(json);
 
         using StreamWriter writer = new StreamWriter(savePath);
         writer.WriteLine(json);
@@ -32,15 +30,15 @@ public class SaveData : MonoBehaviour
     [CanBeNull]
     public static UserData LoadUserData()
     {
+        Debug.Log(GetPaths());
         if (File.Exists(GetPaths()))
         {
-            Debug.Log("file exists");
             using StreamReader reader = new StreamReader(GetPaths());
             string json = reader.ReadToEnd();
             UserData data = JsonUtility.FromJson<UserData>(json);
-            Debug.Log(data.CurrentCarId);
             return data;
         }
+
         return null;
     }
 }
