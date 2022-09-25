@@ -12,7 +12,7 @@ public class SaveData : MonoBehaviour
     private static String GetPaths()
     {
         //Test Path
-        return Application.dataPath + Path.AltDirectorySeparatorChar + "SaveUserData.json";
+        //return Application.dataPath + Path.AltDirectorySeparatorChar + "SaveUserData.json";
         //Persistent Path
         return Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveUserData.json";
     }
