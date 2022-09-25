@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class CanvasController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject f3Menu, settingsMenu, mapMenu, pauseMenu;
+    private GameObject f3Menu, settingsMenu, mapMenu, pauseMenu, garageMenu;
 
     private Controls _controls;
     private InputAction f3;
@@ -52,6 +52,7 @@ public class CanvasController : MonoBehaviour
         settingsMenu.SetActive(false);
         mapMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        garageMenu.SetActive(false);
     }
 
     private void pressedEsc(InputAction.CallbackContext context) {
@@ -120,5 +121,15 @@ public class CanvasController : MonoBehaviour
 
     public void closePauseMenu() {
         pauseMenu.SetActive(false);
+    }
+
+    public void openGarageMenu()
+    {
+        garageMenu.SetActive(true);
+    }
+
+    public void closeGarageMenu()
+    {
+        garageMenu.SetActive(false);
     }
 }
