@@ -40,5 +40,15 @@ public class General : MonoBehaviour
         _canvasController.openPauseMenu();
     }
 
+    public void switchFromPauseToGame()
+    {
+        _canvasController.closePauseMenu();
+        _canvasController.openTouchElemens();
+    }
     
+    public void switchFromGameToPause()
+    {
+        _canvasController.openPauseMenu();
+        _canvasController.closeTouchElements();
+    }
 }
