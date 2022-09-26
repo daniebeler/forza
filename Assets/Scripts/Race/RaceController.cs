@@ -9,7 +9,8 @@ using UnityEngine.PlayerLoop;
 public class RaceController : MonoBehaviour
 {
     [SerializeField] private int raceId;
-    [SerializeField] private GameObject finishObject, raceCanvas;
+    [SerializeField] private GameObject finishObject, raceCanvas, raceFinishedCanvas;
+    [SerializeField] private int bronzeSeconds, silverSeconds, goldSeconds;
 
     private List<SingleCheckpoint> _singleCheckpointsList;
     private int _nextCheckpointIndex;
@@ -26,6 +27,7 @@ public class RaceController : MonoBehaviour
 
     public void StartRace()
     {
+        _time = DateTime.Now;
         Debug.Log("start the race");
         finishObject.SetActive(true);
         Debug.Log(finishObject.activeSelf);
@@ -98,6 +100,9 @@ public class RaceController : MonoBehaviour
         {
             _finishTime = DateTime.Now - _time;
             _finished = true;
+            raceCanvas.SetActive(false);
+            raceFinishedCanvas.SetActive(true);
+            raceFinishedCanvas.GetComponent<RaceFinishedCanvas>().setMedal(whichMedal());
             Debug.Log("finish Race");
             Debug.Log(_finishTime.ToString("mm':'ss':'ff"));
             SaveTimeIfHighscore();
@@ -106,6 +111,21 @@ public class RaceController : MonoBehaviour
         {
             Debug.Log("missing Checkpoints");
         }
+    }
+
+    private String whichMedal()
+    {
+        if (_finishTime.Seconds < goldSeconds)
+        {
+            return "Gold";
+        } else if (_finishTime.Seconds < silverSeconds)
+        {
+            return "Silver";
+        } else if (_finishTime.Seconds < bronzeSeconds)
+        {
+            return "Bronze";
+        }
+        else return "";
     }
 
     private void SaveTimeIfHighscore()
