@@ -13,6 +13,7 @@ public class CarSpawner : MonoBehaviour
     public CameraFollow cameraFollow;
     
     private GameObject currentCar;
+    private int currentCarIndex;
     void Start()
     {
         UserData userData = SaveData.LoadUserData();
@@ -37,8 +38,14 @@ public class CarSpawner : MonoBehaviour
         }
         currentCar = Instantiate(CarPrefabs[carIndex], carPosition, carRotation);
         cameraFollow.setTarget(currentCar.transform);
+        currentCarIndex = carIndex;
         UserData userData = SaveData.LoadUserData();
         userData!.CurrentCarId = carIndex;
         SaveData.SaveDataVoid(userData);
+    }
+
+    public int getCurrentCarIndex()
+    {
+        return currentCarIndex;
     }
 }

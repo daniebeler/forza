@@ -14,6 +14,8 @@ public class CanvasController : MonoBehaviour
     private InputAction map;
     private InputAction pause;
 
+    [SerializeField] private General general;
+
     public void Awake()
     {
         _controls = new Controls();
@@ -60,6 +62,8 @@ public class CanvasController : MonoBehaviour
             closeMapMenu();
         } else if (settingsMenu.activeSelf) {
             closeSettingsMenu();
+        } else if (garageMenu.activeSelf) {
+            general.switchFromGarageToGame();
         } else if (pauseMenu.activeSelf) {
             closePauseMenu();
         } else {
@@ -106,14 +110,6 @@ public class CanvasController : MonoBehaviour
     public void closeMapMenu() {
         mapMenu.SetActive(false);
     }
-    
-    void togglePauseMenu(InputAction.CallbackContext context) {
-        if(pauseMenu.activeSelf) {
-            pauseMenu.SetActive(false);
-        } else { 
-            pauseMenu.SetActive(true);
-        }
-    }
 
     public void openPauseMenu() {
         pauseMenu.SetActive(true);
@@ -131,5 +127,6 @@ public class CanvasController : MonoBehaviour
     public void closeGarageMenu()
     {
         garageMenu.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 }

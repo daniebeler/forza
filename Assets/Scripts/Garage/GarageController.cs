@@ -12,7 +12,7 @@ public class GarageController : MonoBehaviour
 
     [SerializeField] private CarSpawner carSpawner;
 
-    private string[] carNames = {"f", "me", "m", "me", "m", "me", "m", "me", "m"};
+    private string[] carNames = {"f", "me", "m"};
  
     public void Start()
     {
@@ -42,15 +42,40 @@ public class GarageController : MonoBehaviour
             currentAngle.z);
  
         camera.transform.eulerAngles = currentAngle;
-
-        int clamped = Clamp0360(currentAngle.y);
         
         garageCanvas.setCarNameText(carNames[getCurrentCarIndex()]);
+
+        if (carSpawner.getCurrentCarIndex() == getCurrentCarIndex())
+        {
+            garageCanvas.updateSelectButton(true);
+        }
+        else
+        {
+            garageCanvas.updateSelectButton(false);
+        }
+
+        if (getCurrentCarIndex() == 0)
+        {
+            garageCanvas.enableLeftButton(false);
+        }
+        else
+        {
+            garageCanvas.enableLeftButton(true);
+        }
+        
+        if (getCurrentCarIndex() == carNames.Length - 1)
+        {
+            garageCanvas.enableRightButton(false);
+        }
+        else
+        {
+            garageCanvas.enableRightButton(true);
+        }
     }
 
     private int getCurrentCarIndex()
     {
-        return Mathf.RoundToInt(Clamp0360(camera.transform.eulerAngles.y) / 45);
+        return Mathf.RoundToInt(Clamp0360(targetAngle.y) / 45);
     }
     
     public int Clamp0360(float eulerAngles)

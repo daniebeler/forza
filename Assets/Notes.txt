@@ -1,3 +1,5 @@
 
 
 Primary Color: #2CA43C
+
+Disabled Button Color: #898989

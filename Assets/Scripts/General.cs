@@ -37,6 +37,7 @@ public class General : MonoBehaviour
         carCamera.enabled = true;
         garageCamera.enabled = false;
         _canvasController.closeGarageMenu();
+        _canvasController.openPauseMenu();
     }
 
     
