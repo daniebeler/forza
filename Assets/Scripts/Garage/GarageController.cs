@@ -10,6 +10,8 @@ public class GarageController : MonoBehaviour
     private float lerpSpeed = 10f;
     private Vector3 currentAngle, targetAngle;
 
+    [SerializeField] private CarSpawner carSpawner;
+
     private string[] carNames = {"f", "me", "m", "me", "m", "me", "m", "me", "m"};
  
     public void Start()
@@ -43,7 +45,12 @@ public class GarageController : MonoBehaviour
 
         int clamped = Clamp0360(currentAngle.y);
         
-        garageCanvas.setCarNameText(carNames[Mathf.RoundToInt(clamped / 45)]);
+        garageCanvas.setCarNameText(carNames[getCurrentCarIndex()]);
+    }
+
+    private int getCurrentCarIndex()
+    {
+        return Mathf.RoundToInt(Clamp0360(camera.transform.eulerAngles.y) / 45);
     }
     
     public int Clamp0360(float eulerAngles)
@@ -54,5 +61,10 @@ public class GarageController : MonoBehaviour
             result += 360f;
         }
         return Mathf.RoundToInt(result);
+    }
+
+    public void selectCar()
+    {
+        carSpawner.setCurrentCar(getCurrentCarIndex());
     }
 }

@@ -10,11 +10,13 @@ public class General : MonoBehaviour
     [SerializeField] private Camera carCamera, garageCamera;
 
     [SerializeField] private CanvasController _canvasController;
+    
 
     private void Start()
     {
         carCamera.enabled = true;
         garageCamera.enabled = false;
+        
     }
 
     public void exitGame()
@@ -36,4 +38,6 @@ public class General : MonoBehaviour
         garageCamera.enabled = false;
         _canvasController.closeGarageMenu();
     }
+
+    
 }

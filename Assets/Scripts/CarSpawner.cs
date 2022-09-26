@@ -11,6 +11,8 @@ public class CarSpawner : MonoBehaviour
     [SerializeField]
     private Vector3 position;
     public CameraFollow cameraFollow;
+    
+    private GameObject currentCar;
     void Start()
     {
         UserData userData = SaveData.LoadUserData();
@@ -18,18 +20,25 @@ public class CarSpawner : MonoBehaviour
         {
             SaveData.SaveDataVoid(new UserData(0, new List<RaceHighscore>()));
         }
-        GameObject car = Instantiate(CarPrefabs[carNumber], position, Quaternion.identity);
-        cameraFollow.setTarget(car.transform);
-    }
-    void SpawnCar(Vector3 spawnPosition)
-    {
-        GameObject car = Instantiate(CarPrefabs[carNumber], spawnPosition, Quaternion.identity);
-        cameraFollow.setTarget(car.transform);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
+        setCurrentCar(userData.CurrentCarId);
+    }
+    
+
+    public void setCurrentCar(int carIndex)
+    {
+        Vector3 carPosition = new Vector3(0, 1, 0);
+        Quaternion carRotation = new Quaternion();
+        if (currentCar != null)
+        {
+            carPosition = currentCar.transform.position;
+            carRotation = currentCar.transform.rotation;
+            Destroy(currentCar);
+        }
+        currentCar = Instantiate(CarPrefabs[carIndex], carPosition, carRotation);
+        cameraFollow.setTarget(currentCar.transform);
+        UserData userData = SaveData.LoadUserData();
+        userData!.CurrentCarId = carIndex;
+        SaveData.SaveDataVoid(userData);
     }
 }
