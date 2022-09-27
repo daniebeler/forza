@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class General : MonoBehaviour
@@ -50,5 +46,10 @@ public class General : MonoBehaviour
     {
         _canvasController.openPauseMenu();
         _canvasController.closeTouchElements();
+    }
+    
+    public bool playingOnMobile()
+    {
+        return Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
     }
 }

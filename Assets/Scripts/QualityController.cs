@@ -3,28 +3,37 @@ using UnityEngine.Rendering;
 
 public class QualityController : MonoBehaviour
 {
-    
+
     [SerializeField] private RenderPipelineAsset[] qualityLevels;
-    
+
     private Resolution[] resolutions;
-    
+
     void Start()
     {
-        if (PlayerPrefs.GetInt("vsync", 0) == 1)
+        if (Application.platform == RuntimePlatform.Android)
         {
-            QualitySettings.vSyncCount = 1;
+            QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
         }
         else
         {
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 300;
-        }
-        
-        setQualityLevel(PlayerPrefs.GetInt("qualitylevel", 5));
+            if (PlayerPrefs.GetInt("vsync", 0) == 1)
+            {
+                QualitySettings.vSyncCount = 1;
+                Application.targetFrameRate = 60;
+            }
+            else
+            {
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 300;
+            }
 
-        setTargetFramerate(PlayerPrefs.GetInt("framerate", 60));
-        
+            setQualityLevel(PlayerPrefs.GetInt("qualitylevel", 5));
+
+            setTargetFramerate(PlayerPrefs.GetInt("framerate", 60));
+        }
+
+
         resolutions = Screen.resolutions;
     }
 
@@ -42,10 +51,11 @@ public class QualityController : MonoBehaviour
         }
     }
 
-    public void setTargetFramerate(int framerate) {
+    public void setTargetFramerate(int framerate)
+    {
         Application.targetFrameRate = framerate;
     }
-    
+
     public void setQualityLevel(int index)
     {
         QualitySettings.SetQualityLevel(index);

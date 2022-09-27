@@ -3,7 +3,7 @@ using UnityEngine;
 public class GarageController : MonoBehaviour
 {
 
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
 
     [SerializeField] private GarageCanvas garageCanvas;
 

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CanvasController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject f3Menu, settingsMenu, mapMenu, pauseMenu, garageMenu, touchElements;
+    private GameObject f3Menu, settingsMenu, mapMenu, pauseMenu, garageMenu, touchElements, exitDialog;
 
     private Controls _controls;
     private InputAction f3;
@@ -55,11 +53,15 @@ public class CanvasController : MonoBehaviour
         mapMenu.SetActive(false);
         pauseMenu.SetActive(false);
         garageMenu.SetActive(false);
-        touchElements.SetActive(true);
+        exitDialog.SetActive(false);
+        touchElements.SetActive(general.playingOnMobile());
     }
 
     private void pressedEsc(InputAction.CallbackContext context) {
-        if (mapMenu.activeSelf) {
+        if (exitDialog.activeSelf)
+        {
+            closeExitDialog();
+        } else if (mapMenu.activeSelf) {
             closeMapMenu();
         } else if (settingsMenu.activeSelf) {
             closeSettingsMenu();
@@ -134,11 +136,21 @@ public class CanvasController : MonoBehaviour
 
     public void openTouchElemens()
     {
-        touchElements.SetActive(true);
+        touchElements.SetActive(general.playingOnMobile());
     }
 
     public void closeTouchElements()
     {
         touchElements.SetActive(false);
+    }
+
+    public void openExitDialog()
+    {
+        exitDialog.SetActive(true);
+    }
+
+    public void closeExitDialog()
+    {
+        exitDialog.SetActive(false);
     }
 }
