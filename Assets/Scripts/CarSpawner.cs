@@ -19,7 +19,8 @@ public class CarSpawner : MonoBehaviour
         UserData userData = SaveData.LoadUserData();
         if (userData == null)
         {
-            SaveData.SaveDataVoid(new UserData(0, new List<RaceHighscore>()));
+            userData = new UserData(0, new List<RaceHighscore>());
+            SaveData.SaveDataVoid(userData);
         }
         
         setCurrentCar(userData.CurrentCarId);

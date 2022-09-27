@@ -19,6 +19,7 @@ public class SaveData : MonoBehaviour
 
     public static void SaveDataVoid(UserData saveObject)
     {
+        Debug.Log("save data");
         string savePath = GetPaths();
         
         string json = JsonUtility.ToJson(saveObject);
