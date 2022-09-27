@@ -29,7 +29,7 @@ public class CarSpawner : MonoBehaviour
 
     public void setCurrentCar(int carIndex)
     {
-        Vector3 carPosition = new Vector3(0, 1, 0);
+        Vector3 carPosition = position;
         Quaternion carRotation = new Quaternion();
         if (currentCar != null)
         {
