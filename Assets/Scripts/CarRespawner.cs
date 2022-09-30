@@ -50,6 +50,7 @@ public class CarRespawner : MonoBehaviour
     {
         respawnCar();
         canvasController.closePauseMenu();
+        canvasController.openTouchElemens();
     }
 
     private void respawnCar()
