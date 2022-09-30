@@ -822,7 +822,6 @@ GameObject:
   - component: {fileID: 9053521128952075320}
   - component: {fileID: 9053521128952075270}
   - component: {fileID: 4233949952897940585}
-  - component: {fileID: 414032106643254953}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -897,18 +896,6 @@ MonoBehaviour:
   maxMotorTorque: 1000
   maxSteeringAngle: 25
   centerOfMass: {x: 0, y: 0, z: 0}
---- !u!114 &414032106643254953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9053521128952075268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf1bd2b95c0d5a42a76dd413e7b8af9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9053521129779670250
 GameObject:
   m_ObjectHideFlags: 0

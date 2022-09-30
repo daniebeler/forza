@@ -11,7 +11,7 @@ public class CarSpawner : MonoBehaviour
     [SerializeField]
     private Vector3 position;
     public CameraFollow cameraFollow;
-    
+
     private GameObject currentCar;
     private int currentCarIndex;
     void Start()
@@ -48,5 +48,10 @@ public class CarSpawner : MonoBehaviour
     public int getCurrentCarIndex()
     {
         return currentCarIndex;
+    }
+
+    public GameObject getCurrentCar()
+    {
+        return currentCar;
     }
 }

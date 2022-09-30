@@ -14,6 +14,10 @@ public class CarRespawner : MonoBehaviour
 
     private Controls _controls;
     private InputAction _respawn;
+
+    private CarSpawner _carSpawner;
+
+    [SerializeField] private CanvasController canvasController;
     private void Awake()
     {
         _controls = new Controls();
@@ -34,18 +38,30 @@ public class CarRespawner : MonoBehaviour
     void Start()
     {
         _respawnPoints = GameObject.FindGameObjectsWithTag("respawnpoints").ToList();
+        _carSpawner = GetComponent<CarSpawner>();
     }
 
     void Respawn(InputAction.CallbackContext context) 
     {
+        respawnCar();
+    }
+
+    public void respawnCarAndClosePauseMenu()
+    {
+        respawnCar();
+        canvasController.closePauseMenu();
+    }
+
+    private void respawnCar()
+    {
         Transform closestRespawnPosition = FindClosestPoint();
-        gameObject.transform.position = closestRespawnPosition.position;
-        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _carSpawner.getCurrentCar().transform.position = closestRespawnPosition.position;
+        _carSpawner.getCurrentCar().GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
     
     Transform FindClosestPoint()
     {
-        Vector3 startPosition = gameObject.transform.position;
+        Vector3 startPosition = _carSpawner.getCurrentCar().transform.position;
         GameObject bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         foreach (var respawnPoint in _respawnPoints)
